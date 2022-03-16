@@ -1,3 +1,4 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -5,7 +6,11 @@ from sqlalchemy.ext.declarative import declarative_base
 # Database URL - in this local file directory
 # SQL_DATABASE_URL = 'sqlite:///./todos.db' --- sqlite setting
 # SQL_DATABASE_URL = 'postgresql://postgres:123456@localhost/TodoApplicationDatabase' -- postgres setting
-SQL_DATABASE_URL = 'mysql+pymysql://root:123456@127.0.0.1:3306/todoapp'
+SQL_DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if SQL_DATABASE_URL.startswith('postgres://'):
+    SQL_DATABASE_URL = SQL_DATABASE_URL.replace(
+        "postgres://", "postgresql://", 1)
 
 # Creating a connection - SQLITE Setting
 # engine = create_engine(

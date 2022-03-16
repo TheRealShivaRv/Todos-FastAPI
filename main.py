@@ -1,4 +1,3 @@
-from msilib.schema import Directory
 from fastapi import FastAPI, Depends, status
 import models
 from database import engine
